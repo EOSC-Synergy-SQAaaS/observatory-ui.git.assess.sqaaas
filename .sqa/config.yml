@@ -1,0 +1,56 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/1.7.8
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/madgeek-arc/observatory-ui:
+      branch: main
+      repo: https://github.com/madgeek-arc/observatory-ui.git
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/madgeek-arc/observatory-ui git:
+        commands:
+        - /usr/bin/env sh .sqa/script.tasty-azure-macaque.sh
+        container: qc.acc_silly-cerulean-oriole
+  QC.Doc:
+    repos:
+      github.com/madgeek-arc/observatory-ui find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.slaphappy-persimmon-dollar.sh
+        container: qc.doc_trippy-amaranth-stingray
+      github.com/madgeek-arc/observatory-ui git:
+        commands:
+        - /usr/bin/env sh .sqa/script.smelly-pink-warthog.sh
+        container: qc.doc_skanky-celadon-llama
+      github.com/madgeek-arc/observatory-ui markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.scanty-aqua-dugong.sh
+        container: qc.doc_stinky-xanthic-barb
+  QC.Lic:
+    repos:
+      github.com/madgeek-arc/observatory-ui licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.stinky-goldenrod-wombat.sh
+        container: qc.lic_squirrely-black-horse
+  QC.Sty:
+    repos:
+      github.com/madgeek-arc/observatory-ui hadolint:
+        commands:
+        - /usr/bin/env sh .sqa/script.flimsy-cream-liger.sh
+        container: qc.sty_scummy-green-balinese
+      github.com/madgeek-arc/observatory-ui jsonlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.paltry-blue-octopus.sh
+        container: qc.sty_gamy-plum-macaque
+  QC.Ver:
+    repos:
+      github.com/madgeek-arc/observatory-ui get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.slaphappy-violet-crane.sh
+        container: qc.ver_tasty-brown-tang
+timeout: 5400
